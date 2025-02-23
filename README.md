@@ -53,7 +53,7 @@ A sleek, futuristic overlay designed for streamers to display their Solana (SOL)
 - Refresh the page to reset the initial balance and start tracking PnL from a new baseline.
 
 ## Troubleshooting
-- **"Error" Displayed**: Check your wallet address and API key for typos. Ensure your html is running live, not just opened. (tutorial on VsCode https://www.youtube.com/watch?v=ZfCi0Is9gLU&ab_channel=Dr.ToddWolfeTechnologyTrainingandTutorials)
+- **"Error" Displayed**: Check your wallet address and API key for typos. Ensure your html is running live, not just opened. (tutorial on VsCode [video](https://www.youtube.com/watch?v=ZfCi0Is9gLU&ab_channel=Dr.ToddWolfeTechnologyTrainingandTutorials))
 - **No Updates**: Verify your internet connection and that the RPC URL is correct.
 - **Background Image Issue**: Ensure `giphy.gif` exists in the project folder or replace it with a valid URL.
 
