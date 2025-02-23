@@ -37,7 +37,7 @@ A sleek, futuristic overlay designed for streamers to display their Solana (SOL)
 5. **Integrate with Streaming Software**
 - Open your streaming software (e.g., OBS Studio).
 - Add a new "Browser" source.
-- Set the URL to the local file path of `index.html` (e.g., `file:///path/to/solana-pnl-overlay/index.html`).
+- Set the URL to the local file path of `index.html` (e.g., `http://127.0.0.1:5500/pnl.html`).
 - Adjust the size and position of the overlay as needed.
 
 6. **Customize (Optional)**
