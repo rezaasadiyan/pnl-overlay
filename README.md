@@ -23,7 +23,7 @@ A sleek, futuristic overlay designed for streamers to display their Solana (SOL)
 1. **Clone the Repository**
 
 2. **Open the Project**
-- Open the `index.html` file in a text editor (e.g., VS Code).
+- Open the `pnl.html` file in a text editor (e.g., VS Code).
 
 3. **Configure Your Wallet Address and API Key**
 - In the `<script>` section of `index.html`, locate the following lines:
@@ -35,12 +35,12 @@ A sleek, futuristic overlay designed for streamers to display their Solana (SOL)
 - Replace `YOUR_API_KEY_HERE` with your Helius API key. Sign up at [Helius](https://helius.xyz/) to get one if you don’t have it. (its free)
 
 4. **Test the Overlay**
-- Open `index.html` in a web browser to verify it works. You should see your wallet balance and PnL updating every 5 seconds.
+- Open `pnl.html` in a web browser to verify it works. You should see your wallet balance and PnL updating every 5 seconds.
 
 5. **Integrate with Streaming Software**
 - Open your streaming software (e.g., OBS Studio).
 - Add a new "Browser" source.
-- Set the URL to the local file path of `index.html` (e.g., `http://127.0.0.1:5500/pnl.html`).
+- Set the URL to the local file path of `pnl.html` (e.g., `http://127.0.0.1:5500/pnl.html`).
 - Adjust the size and position of the overlay as needed.
 
 6. **Customize (Optional)**
