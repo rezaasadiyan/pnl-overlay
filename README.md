@@ -26,7 +26,7 @@ A sleek, futuristic overlay designed for streamers to display their Solana (SOL)
 - Open the `pnl.html` file in a text editor (e.g., VS Code).
 
 3. **Configure Your Wallet Address and API Key**
-- In the `<script>` section of `index.html`, locate the following lines:
+- In the `<script>` section of `pnl.html`, locate the following lines:
   ```
   const walletAddress = "YOUR_WALLET_ADDRESS_HERE";
   const RPC_URL = "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY_HERE";
