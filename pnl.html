@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana PnL Overlay</title>
+    <style>
+        body {
+            color: white;
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            background-color: #000; /* Set background color to black */
+        }
+
+        .overlay {
+            padding: 12px 25px; /* Increased padding for bigger box */
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            border-radius: 12px; /* Slightly bigger border-radius */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            min-width: 250px; /* Increased minimum width for bigger box */
+            position: relative;
+        }
+
+        /* Set the background image with 60% opacity using a pseudo-element */
+        .overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('giphy.gif') no-repeat center center;
+            background-size: cover;
+            opacity: 0.6; /* Set image opacity to 60% */
+            z-index: -1; /* Place the image behind content */
+            border-radius: 12px; /* Optional: Round the corners of the background image */
+        }
+
+        /* Style for text titles and values */
+        .title {
+            font-size: 14px; /* Smaller font size for titles */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 25px #fff, 0 0 5px #fff; /* Black outline and glow */
+            margin-bottom: 5px; /* Space between title and value */
+        }
+
+        .value {
+            font-size: 18px; /* Smaller font size for values */
+            margin-top: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 25px #fff, 0 0 5px #fff; /* Black outline and glow */
+        }
+
+        .positive {
+            color: #32CD32; /* Green for positive PnL */
+        }
+
+        .negative {
+            color: #FF6347; /* Red for negative PnL */
+        }
+
+        .neutral {
+            color: white; /* White for neutral (0) PnL */
+        }
+
+        /* Style for the signature */
+        .signature {
+            font-size: 8px; /* Smaller font size */
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.6); /* 60% opacity */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Light black shadow for better readability */
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+    </style>
+    <!-- Add Orbitron font from Google Fonts for a sci-fi look -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay">
+        <div class="title">Wallet Balance</div>
+        <div class="value" id="balance">Loading...</div>
+        <div class="title">PnL</div>
+        <div class="value" id="pnl">Loading...</div>
+        <div class="signature">Made by @rezacoded</div> <!-- Signature at the bottom right -->
+    </div>
+    
+    <script>
+        const walletAddress = "YOUR_WALLET_ADDRESS_HERE";
+        const RPC_URL = "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY_HERE"; // Replace with your API key
+        let initialBalance = null;
+
+        async function fetchBalance() {
+            try {
+                const response = await fetch(RPC_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        jsonrpc: "2.0",
+                        id: 1,
+                        method: "getBalance",
+                        params: [walletAddress]
+                    })
+                });
+                const data = await response.json();
+                const balance = data.result.value / 1e9; // Convert lamports to SOL
+                document.getElementById("balance").innerText = balance.toFixed(2) + " SOL";
+                
+                if (initialBalance === null) {
+                    initialBalance = balance;
+                }
+                
+                const pnl = balance - initialBalance;
+                const pnlElement = document.getElementById("pnl");
+                pnlElement.innerText = pnl.toFixed(2) + " SOL";
+                
+                // Update PnL color based on value
+                pnlElement.classList.remove("positive", "negative", "neutral"); // Remove any previous color classes
+                if (pnl > 0) {
+                    pnlElement.classList.add("positive");
+                } else if (pnl < 0) {
+                    pnlElement.classList.add("negative");
+                } else {
+                    pnlElement.classList.add("neutral"); // Apply white color for zero
+                }
+            } catch (error) {
+                console.error("Error fetching balance:", error);
+                document.getElementById("balance").innerText = "Error";
+                document.getElementById("pnl").innerText = "Error";
+            }
+        }
+        
+        setInterval(fetchBalance, 5000); // Refresh every 5 seconds
+        fetchBalance();
+    </script>
+</body>
+</html>
